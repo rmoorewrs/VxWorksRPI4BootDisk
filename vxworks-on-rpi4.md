@@ -3,7 +3,7 @@
 - Open Workbench 4/VxWorks 7 and create a VSB for the RPI4
 	- name it something like `rpi4-vsb`
 - for the BSP, select `rpi_4_xxxxxx` like this and hit `Finish`:
-![[vxworks-on-rpi4-1739894945435.webp|387x489]]
+![[attachments/vxworks-on-rpi4-1739894945435.webp|387x489]]
 
 - Build the VSB, you shouldn't get any errors
 
@@ -13,13 +13,13 @@
 	- name it something like `rpi4-vip`
 - Choose "Based on a source build project", select the previous `rpi4-vsb` and hit `Finish`
 	- We'll customize in the next step
-![[vxworks-on-rpi4-1739895265814.webp|389x503]]
+![[attachments/vxworks-on-rpi4-1739895265814.webp|389x503]]
 
 
 ### 2.1 Configure the VIP project
 - open the VIP project `Kernel Configuration` tool
 - Select the `Bundles` Tab in the middle of the screen like this and add the `Standalone kernel Shell` bundle by right-clicking and hitting `Add`:
-![[vxworks-on-rpi4-1739895693630.webp|500x322]]
+![[attachments/vxworks-on-rpi4-1739895693630.webp|500x322]]
 - return to the `Components` Tab and hit `Ctrl-F` to search for `CONSOLE_BAUD_RATE` and make sure it's set to 115200
 - Optionally, add components that you want available in the shell 
 	- `ping (FOLDER_PING)` enables network ping
@@ -70,11 +70,11 @@ kernel=u-boot.bin
 - easiest solution is an FTDI USB RS232 cable with GND,TX, RX connections
 - Recommended Cable: FTDI chipset USB/232 adapters on Amazon 
   https://www.amazon.com/dp/B07B5TP67V
-![[vxworks-on-rpi4-1740068768847.webp|195x325]]
+![[attachments/vxworks-on-rpi4-1740068768847.webp|195x325]]
 
 
 Here is the Raspberry Pi GPIO Layout, we're using the 3 pins near the top right: Pin 6 (Ground), Pin 8 (UART TX) and PIN 10 (UART RX)
-![[vxworks-on-rpi4-1740068990218.webp|461x727]]
+![[attachments/vxworks-on-rpi4-1740068990218.webp|461x727]]
 
 
 ### FTDI USB/Serial Cable to RPI GPIO Pinout
@@ -87,7 +87,7 @@ Here is the Raspberry Pi GPIO Layout, we're using the 3 pins near the top right:
 
 ### Optional: Glue the Single Pin Connectors Together
 
-![[vxworks-on-rpi4-1740071287468.webp|354x277]]
+![[attachments/vxworks-on-rpi4-1740071287468.webp|354x277]]
 
 In the photo above, I wrapped cotton thread around the 3 pin connectors and added a drop of superglue. 
 
@@ -98,7 +98,7 @@ In the photo above, I wrapped cotton thread around the 3 pin connectors and adde
 ### Optional: Tie Back the Additional Wires with Heatshrink Tubing
 
 Since you're only using 3 of the connectors on the FTDI/USB serial cable, the extra connectors can get in the way. Rather than cut the extras off (which runs the risk shorting something) I used a piece of heatshrink tubing to hole the extra connectors out of the way. This is completely non-destructive and allows you to potentially use the other signals in the future. 
-![[vxworks-on-rpi4-1740071944476.webp|500x362]]
+![[attachments/vxworks-on-rpi4-1740071944476.webp|500x362]]
 
 
 ## Additional Notes:
