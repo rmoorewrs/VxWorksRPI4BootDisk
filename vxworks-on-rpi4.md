@@ -159,7 +159,6 @@ The output will be located in `<build_dir>/tmp-glibc/deploy/images/bcm-2xxx-rpi4
 
 
 ### Manually Loading the uVxWorks image in u-boot:
-``
 ```
 fatload mmc 0:1 0x100000  uVxWorks
 ```
