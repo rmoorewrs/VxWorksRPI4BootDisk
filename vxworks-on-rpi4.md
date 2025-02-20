@@ -133,7 +133,7 @@ In the photo above, I wrapped cotton thread around the 3 pin connectors and adde
 
 ### Optional: Tie Back the Additional Wires with Heatshrink Tubing
 
-Since you're only using 3 of the connectors on the FTDI/USB serial cable, the extra connectors can get in the way. Rather than cut the extras off (which runs the risk shorting something) I used a piece of heatshrink tubing to hole the extra connectors out of the way. This is completely non-destructive and allows you to potentially use the other signals in the future. 
+Since you're only using 3 of the connectors on the FTDI/USB serial cable, the extra connectors can get in the way. Rather than cut the extras off (which runs the risk shorting something) I used a piece of heatshrink tubing to hold the extra connectors out of the way. This is completely non-destructive and allows you to potentially use the other signals in the future. 
 
 ![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1740071944476.webp)
 
@@ -144,6 +144,18 @@ https://hechao.li/2021/12/20/Boot-Raspberry-Pi-4-Using-uboot-and-Initramfs/
 
 This tutorial was actually better, and I got u-boot up and running:
 https://danmc.net/posts/raspberry-pi-4-b-u-boot/
+
+If you use to WR Linux LTS (located here on GitHub https://github.com/WindRiverLinux24), building `u-boot` is easy.
+```
+$ mkdir u-boot-rpi4 && cd u-boot-rpi4
+$ git clone --branch WRLINUX_10_24_LTS https://github.com/WindRiverLinux24/wrlinux-x
+$ ./wrlinux-x/setup.sh --machines bcm-2xxx-rpi4 --accept-eula=yes
+$ . ./environment-setup-x86_64-wrlinuxsdk-linux 	// optional, forces the build of local host tools
+$ . ./oe-init-build-env [build-name-date]
+$ bitbake u-boot
+```
+
+The output will be located in `<build_dir>/tmp-glibc/deploy/images/bcm-2xxx-rpi4/u-boot.bin`
 
 
 ### Manually Loading the uVxWorks image in u-boot:
