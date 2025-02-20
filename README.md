@@ -1,6 +1,8 @@
 # VxWorksRPI4BootDisk
 This zip file contains all the bootloader files required to boot VxWorks on a Raspberry Pi 4, except for the the uVxWorks kernel. You have to build and add the uVxWorks kernel yourself. 
 
+Full instructions are located here in the [vxworks-on-rpi4.md file ](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/vxworks-on-rpi4.md)
+
 ## Steps to create a bootable micro SD card to boot VxWorks on RPI4
 
 ### 1. Format an SD card with FAT32 filesystem
