@@ -3,7 +3,9 @@
 - Open Workbench 4/VxWorks 7 and create a VSB for the RPI4
 	- name it something like `rpi4-vsb`
 - for the BSP, select `rpi_4_xxxxxx` like this and hit `Finish`:
+  
 ![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1739894945435.webp)
+
 - Build the VSB, you shouldn't get any errors
 
 ## 2. Create, Configure and Build the VIP based on the VSB
@@ -12,6 +14,7 @@
 	- name it something like `rpi4-vip`
 - Choose "Based on a source build project", select the previous `rpi4-vsb` and hit `Finish`
 	- We'll customize in the next step
+ 
 ![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1739895265814.webp)
 
 
@@ -20,7 +23,7 @@
 
 #### 2.1.0 Add the Target Shell Bundle
 - Select the `Bundles` Tab in the middle of the screen like this and add the `Standalone kernel Shell` bundle by right-clicking and hitting `Add`:
-- 
+
 ![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1739895693630.webp)
  
  - return to the `Components` Tab
