@@ -18,9 +18,11 @@
 ### 2.1 Configure the VIP project
 - open the VIP project `Kernel Configuration` tool
 
-#### 2.1.0
+#### 2.1.0 Add the Target Shell Bundle
 - Select the `Bundles` Tab in the middle of the screen like this and add the `Standalone kernel Shell` bundle by right-clicking and hitting `Add`:
+- 
 ![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1739895693630.webp)
+ 
  - return to the `Components` Tab
  
 #### 2.1.1 Set the Console Baud Rate
@@ -99,10 +101,12 @@ kernel=u-boot.bin
 - easiest solution is an FTDI USB RS232 cable with GND,TX, RX connections
 - Recommended Cable: FTDI chipset USB/232 adapters on Amazon 
   https://www.amazon.com/dp/B07B5TP67V
+  
 ![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1740068768847.webp)
 
 
 Here is the Raspberry Pi GPIO Layout, we're using the 3 pins near the top right: Pin 6 (Ground), Pin 8 (UART TX) and PIN 10 (UART RX)
+
 ![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1740068990218.webp)
 
 
@@ -127,6 +131,7 @@ In the photo above, I wrapped cotton thread around the 3 pin connectors and adde
 ### Optional: Tie Back the Additional Wires with Heatshrink Tubing
 
 Since you're only using 3 of the connectors on the FTDI/USB serial cable, the extra connectors can get in the way. Rather than cut the extras off (which runs the risk shorting something) I used a piece of heatshrink tubing to hole the extra connectors out of the way. This is completely non-destructive and allows you to potentially use the other signals in the future. 
+
 ![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1740071944476.webp)
 
 
