@@ -3,8 +3,7 @@
 - Open Workbench 4/VxWorks 7 and create a VSB for the RPI4
 	- name it something like `rpi4-vsb`
 - for the BSP, select `rpi_4_xxxxxx` like this and hit `Finish`:
-![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1739894945435.webp)
-
+![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1739894945435.webp|387x489)
 - Build the VSB, you shouldn't get any errors
 
 ## 2. Create, Configure and Build the VIP based on the VSB
@@ -12,25 +11,52 @@
 - In Workbench, create a VxWorks Image Project (VIP)based on the above VSB
 	- name it something like `rpi4-vip`
 - Choose "Based on a source build project", select the previous `rpi4-vsb` and hit `Finish`
-- We'll customize in the next step
-  
-![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1739895265814.webp)
+	- We'll customize in the next step
+![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1739895265814.webp|389x503)
 
 
 ### 2.1 Configure the VIP project
 - open the VIP project `Kernel Configuration` tool
+
+#### 2.1.0
 - Select the `Bundles` Tab in the middle of the screen like this and add the `Standalone kernel Shell` bundle by right-clicking and hitting `Add`:
+![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1739895693630.webp|500x322)
+ - return to the `Components` Tab
+ 
+#### 2.1.1 Set the Console Baud Rate
+- hit `Ctrl-F` to search for `CONSOLE_BAUD_RATE` and set it to your desired rate
+- Default is 115200
 
-![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1739895693630.webp)
+#### 2.1.2 Enable Built-in DTB mode
+- In the kernel configurator tool, hit `Ctrl-F` and search for `STANDALONE_DTB`
+- Right-click to include the feature (`INCLUDE_STANDALONE_DTB`)
+- board won't boot properly without this feature
 
-- return to the `Components` Tab and hit `Ctrl-F` to search for `CONSOLE_BAUD_RATE` and make sure it's set to 115200
-- Optionally, add components that you want available in the shell 
+#### 2.1.3 Configure the Network
+- Search for `GENETv5` and include `DRV_END_FDT_BCM_GENETv5`
+- Search for `IFCONFIG_1` and set the value string similar to this:
+
+```
+"ifname gem0","devname gem0","gateway 10.10.0.1","inet 10.10.11.27/24"
+
+or
+
+"ifname gem0","devname gem0","gateway dhcp","inet dhcp"
+```
+
+![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1740086052356.webp|641x400)
+
+
+
+#### 2.1.4 Optional: add utility features like ping
+Use `Ctrl-F` to search for each of these, select the feature, hit `FIND` and then right-click the feature to `Add`
 	- `ping (FOLDER_PING)` enables network ping
 	- `ifconfig (INCLUDE_IFCONFIG)` enables setting IP address
 	- `routec (INCLUDE_ROUTECMD)` change IP routing
 	- `telnet (FOLDER_TELNET)` add `INCLUDE IPTELNETS` to enable telnet server
+	- `DHCP client (INCLUDE_IPDHPCC)` to enable DHCP client
 
-
+Note: this will add the utilities to the VxWorks C Shell. In order to add them to the bash-like CMD shell, you need to add the corresponding `IPCOM` feature. For example, to add `ping` to the CMD shell, you must select and add `INCLUDE_IPPING_CMD`
 
 
 ## 3. Create Boot Device and copy Files
@@ -73,13 +99,11 @@ kernel=u-boot.bin
 - easiest solution is an FTDI USB RS232 cable with GND,TX, RX connections
 - Recommended Cable: FTDI chipset USB/232 adapters on Amazon 
   https://www.amazon.com/dp/B07B5TP67V
-  
-![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1740068768847.webp)
+![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1740068768847.webp|195x325)
 
 
 Here is the Raspberry Pi GPIO Layout, we're using the 3 pins near the top right: Pin 6 (Ground), Pin 8 (UART TX) and PIN 10 (UART RX)
-
-![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1740068990218.webp)
+![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1740068990218.webp|461x727)
 
 
 ### FTDI USB/Serial Cable to RPI GPIO Pinout
@@ -92,7 +116,7 @@ Here is the Raspberry Pi GPIO Layout, we're using the 3 pins near the top right:
 
 ### Optional: Glue the Single Pin Connectors Together
 
-![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1740071287468.webp)
+![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1740071287468.webp|354x277)
 
 In the photo above, I wrapped cotton thread around the 3 pin connectors and added a drop of superglue. 
 
@@ -103,8 +127,7 @@ In the photo above, I wrapped cotton thread around the 3 pin connectors and adde
 ### Optional: Tie Back the Additional Wires with Heatshrink Tubing
 
 Since you're only using 3 of the connectors on the FTDI/USB serial cable, the extra connectors can get in the way. Rather than cut the extras off (which runs the risk shorting something) I used a piece of heatshrink tubing to hole the extra connectors out of the way. This is completely non-destructive and allows you to potentially use the other signals in the future. 
-
-![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1740071944476.webp)
+![](https://github.com/rmoorewrs/VxWorksRPI4BootDisk/blob/main/attachments/vxworks-on-rpi4-1740071944476.webp|500x362)
 
 
 ## Additional Notes:
@@ -116,8 +139,11 @@ https://danmc.net/posts/raspberry-pi-4-b-u-boot/
 
 
 ### Manually Loading the uVxWorks image in u-boot:
-
+``
 ```
 fatload mmc 0:1 0x100000  uVxWorks
 ```
+
+
+
 
