@@ -55,11 +55,11 @@ or
 
 #### 2.1.4 Optional: add utility features like ping
 Use `Ctrl-F` to search for each of these, select the feature, hit `FIND` and then right-click the feature to `Add`
-	- `ping (FOLDER_PING)` enables network ping
-	- `ifconfig (INCLUDE_IFCONFIG)` enables setting IP address
-	- `routec (INCLUDE_ROUTECMD)` change IP routing
-	- `telnet (FOLDER_TELNET)` add `INCLUDE IPTELNETS` to enable telnet server
-	- `DHCP client (INCLUDE_IPDHPCC)` to enable DHCP client
+- `ping (FOLDER_PING)` enables network ping
+- `ifconfig (INCLUDE_IFCONFIG)` enables setting IP address
+- `routec (INCLUDE_ROUTECMD)` change IP routing
+- `telnet (FOLDER_TELNET)` add `INCLUDE IPTELNETS` to enable telnet server
+- `DHCP client (INCLUDE_IPDHPCC)` to enable DHCP client
 
 Note: this will add the utilities to the VxWorks C Shell. In order to add them to the bash-like CMD shell, you need to add the corresponding `IPCOM` feature. For example, to add `ping` to the CMD shell, you must select and add `INCLUDE_IPPING_CMD`
 
